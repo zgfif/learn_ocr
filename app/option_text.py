@@ -25,7 +25,7 @@ class ImageText:
         """
         self.crop()
         text = image_to_string(image=self.image, lang=self.LANG)
-        print('got', text)
+        # print('got', text)
         return text
 
 

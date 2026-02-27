@@ -4,7 +4,7 @@ import csv
 
 
 class Result:
-    COLUMNS: tuple = ('id', 'question','options')
+    COLUMNS: tuple = ('id', 'question', 'options')
 
     def __init__(self, questions: list[Question]) -> None:
         self.questions = questions

@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+from numpy import ndarray
+from app.types import Coordinates
 
 
 
@@ -11,25 +13,25 @@ class ObjectsOnImage:
 
 
     def __init__(self, image_path: str, pattern_path: str) -> None:
-        self.image_path = image_path
-        self.pattern_path =pattern_path
+        self.image = self._image(image_path)
+        self.pattern = self._image(pattern_path)
 
 
-    def coordinates(self) -> list[tuple[int, int]]:
+    def coordinates(self) -> list[Coordinates]:
         """
         Return coordinates of found objects on image.
         """
-        elements = []
- 
-        image = cv2.imread(self.image_path, 0)
-        # print(type(image), 'image type')
-        template = cv2.imread(self.pattern_path, 0)
+        elements: list = []
 
-        result = cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
+        if self.image is None or self.pattern is None:
+            return elements
+
+        result = cv2.matchTemplate(self.image, self.pattern, cv2.TM_CCOEFF_NORMED)
 
         found = np.where(result > self.THRESHOLD)
 
         rects = []
+        
         h, w = self.PATTERN_SIZE
 
         for pt in zip(*found[::-1]):
@@ -47,5 +49,8 @@ class ObjectsOnImage:
             tpl = int(x), int(y)
             elements.append(tpl)
         return elements
+    
 
-
+    def _image(self, path: str) -> ndarray | None:
+        """Return ndarray by image path."""
+        return cv2.imread(filename=path, flags=0)

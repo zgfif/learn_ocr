@@ -1,7 +1,4 @@
-from app.ocr_core import ocr_core
-
-
-EXPECTED ="""1:48 AM & atll & @) 55,
+img_4732_full_text: str = """1:48 AM & atll & @) 55,
 
 Punkte: 2
 
@@ -25,29 +22,3 @@ B e
 [IKIED
 
 """
-
-EXPECTED2 = """1:48 AM & atll & @) 55,
-
-Punkte: 2 b4
-
-Wie lange dauert normalerweise die Probezeit?
-
-n 2 Jahre
-D 1 Jahr
-D 3 Jahre
-
-B e
-> [w ]
-
-[IKIED
-
-"""
-
-def test_ocr_core():
-    got = ocr_core('IMG_4732.png')
-    assert got == EXPECTED
-
-
-def test_second_ocr_core():
-    got = ocr_core('IMG_4731.png')
-    assert got == EXPECTED2
