@@ -9,10 +9,10 @@ def test_text_blocks():
     found = TextBlocks(image=image).find()
     
     expected: list = [
-        {'start_coord': (37, 50), 'end_coord': (1200, 100)},
-        {'start_coord': (37, 100), 'end_coord': (1200, 100)},
-        {'start_coord': (37, 150), 'end_coord': (1200, 100)},
-        {'start_coord': (37, 200), 'end_coord': (1200, 100)},
+        {'pt_1': (37, 50), 'pt_2': (1200, 100)},
+        {'pt_1': (37, 100), 'pt_2': (1200, 100)},
+        {'pt_1': (37, 150), 'pt_2': (1200, 100)},
+        {'pt_1': (37, 200), 'pt_2': (1200, 100)},
     ]
 
     assert expected == found
