@@ -20,19 +20,13 @@ class ImageText:
 
 
     def fetch(self) -> str:
-        """
-        Return text from image.
-        """
+        """Return text from image."""
         self.crop()
-        text = image_to_string(image=self.image, lang=self.LANG)
-        # print('got', text)
-        return text
-
+        return image_to_string(image=self.image, lang=self.LANG)
+        
 
     def crop(self, save_cropped: bool = True) -> None:
-        """
-        Crop image. And cropped image could be saved.
-        """
+        """Crop image. And cropped image could be saved."""
         if not self.start_coord or not self.end_coord:
             return
         coordinates = *self.start_coord, *self.end_coord
