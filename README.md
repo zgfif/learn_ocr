@@ -1,5 +1,6 @@
 sudo pacman -S tesseract
 sudo pacman -S tesseract-data-deu
+sudo pacman -S tesseract-data-eng
 
 python -m venv .venv
 
