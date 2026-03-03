@@ -11,7 +11,6 @@ def test_line_blocks():
     image = cv2.imread(filename='./IMG_4731.png')
     if image is None:
         return
-    
     for line_block in line_blocks:
         image = Rectangle(image=image).draw(*line_block)
     
