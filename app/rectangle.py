@@ -1,6 +1,6 @@
 from numpy import ndarray
-from app.types import Coordinates
 from cv2 import rectangle
+from app.point import Point
 
 
 
@@ -12,11 +12,12 @@ class Rectangle:
         self.image = image
 
 
-    def draw(self, pt1: Coordinates, pt2: Coordinates) -> ndarray:
+    def draw(self, pt1: Point, pt2: Point) -> ndarray:
         """Draw rectangle by coordinates on the image and return the image."""
         rectangle(
             img=self.image, 
-            pt1=pt1, pt2=pt2, 
+            pt1=(pt1.x, pt1.y), 
+            pt2=(pt2.x, pt2.y), 
             color=self.COLOR, 
             thickness=self.THICKNESS
         )

@@ -6,9 +6,22 @@ class Point:
         self.y = y
 
 
-    def close_to(self, other) -> bool:
+    def close_to(self, other: object) -> bool:
         """
-        Return True 
+        Return True if space between y axis <= threshold (px).
         """
-        return abs(other.y - self.y) <= self.CLOSENESS_THRESHOLD
+        if isinstance(other, Point):
+            return abs(other.y - self.y) <= self.CLOSENESS_THRESHOLD
+        return NotImplemented
+        
 
+    def __repr__(self) -> str:
+        return f'{self.x}, {self.y}'
+    
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Point):
+            return self.x == other.x and self.y == other.y
+        return NotImplemented
+
+    
