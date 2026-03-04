@@ -1,7 +1,7 @@
 import cv2
 from app.rectangle import Rectangle
 from app.view_image import ViewImage
-from app.unit import Unit
+from app.area import Unit
 from app.point import Point
 
 

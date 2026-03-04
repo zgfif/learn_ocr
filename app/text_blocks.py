@@ -7,7 +7,7 @@ class TextBlocks:
         self.image = image
     
 
-    def find(self) -> list:
+    def build(self) -> list:
         result: list = []
 
         return result

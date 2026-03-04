@@ -6,7 +6,7 @@ from PIL import Image
 def test_text_blocks():
     image = Image.open(fp='./IMG_4731.png')
 
-    found = TextBlocks(image=image).find()
+    found = TextBlocks(image=image).build()
     
     expected: list = [
         {'pt_1': (37, 50), 'pt_2': (1200, 100)},

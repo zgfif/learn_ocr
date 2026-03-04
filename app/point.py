@@ -16,7 +16,7 @@ class Point:
         
 
     def __repr__(self) -> str:
-        return f'{self.x}, {self.y}'
+        return f'Point({self.x}, {self.y})'
     
 
     def __eq__(self, other: object) -> bool:

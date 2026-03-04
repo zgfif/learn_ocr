@@ -5,8 +5,8 @@ from numpy import ndarray
 
 
 class ImageData:
-    def __init__(self, image_path: str) -> None:
-        self.image = cv2.imread(filename=image_path)
+    def __init__(self, image: ndarray) -> None:
+        self.image = image
 
 
     def extract(self) -> dict:

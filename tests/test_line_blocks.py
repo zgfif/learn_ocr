@@ -1,5 +1,5 @@
 from tests.fixtures.img_4731_image_dict import image_data
-from app.line_blocks import LineBlocks
+from app.lines import LineBlocks
 import cv2
 from app.rectangle import Rectangle
 from app.view_image import ViewImage

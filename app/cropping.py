@@ -1,25 +1,19 @@
-from app.types import Coordinates, ImageType
+from numpy import ndarray
 from app.point import Point
 
 
+
 class Cropping:
-    DEFAULT_CROPPED_NAME: str = 'cropped.png'
-
-
-    def __init__(self, image: ImageType) -> None:
+    def __init__(self, image: ndarray) -> None:
         self.image = image
 
 
-    def perform(self,
-                start_coord: Point,
-                end_coord: Point,
-                save_image: bool = True
-        ) -> ImageType:
-        """
-        Crop image. And cropped image could be saved.
-        """
-        coordinates = (start_coord.x, start_coord.y, end_coord.x ,end_coord.y)
-        self.image = self.image.crop(coordinates)
-        if save_image:
-            self.image.save(self.DEFAULT_CROPPED_NAME)
-        return self.image
+    def perform(self, pt1: Point, pt2: Point) -> ndarray | None:
+        """Crop image by two points and return cropped image. If no image return None."""
+        if self.image is None:
+            return
+        
+        return self.image[
+            pt1.y:pt2.y, 
+            pt1.x:pt2.x
+        ]

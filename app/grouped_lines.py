@@ -1,9 +1,12 @@
-class Units:
+class GroupedLines:
     def __init__(self, lines: list) -> None:
         self.lines = lines
 
 
     def fetch(self) -> list:
+        """
+        Return the list of grouped lines.
+        """
         units_list = []
 
         unit = self.lines[0]

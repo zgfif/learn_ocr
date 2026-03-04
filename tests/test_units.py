@@ -1,6 +1,6 @@
-from app.units import Units
+from app.grouped_lines import Units
 from tests.fixtures.img_4731_full_lines import lines
-from app.unit import Unit
+from app.area import Unit
 from app.point import Point
 
 

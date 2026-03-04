@@ -4,6 +4,6 @@ from app.point import Point
 
 
 @dataclass
-class Unit:
+class Area:
     pt1: Point
     pt2: Point
