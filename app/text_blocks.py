@@ -1,13 +1,13 @@
-from app.types import ImageType
+# from app.types import ImageType
 
 
 
-class TextBlocks:
-    def __init__(self, image: ImageType) -> None:
-        self.image = image
+# class TextBlocks:
+#     def __init__(self, image: ImageType) -> None:
+#         self.image = image
     
 
-    def build(self) -> list:
-        result: list = []
+#     def build(self) -> list:
+#         result: list = []
 
-        return result
+#         return result

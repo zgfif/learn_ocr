@@ -22,5 +22,8 @@ class Result:
         writer.writerow(self.COLUMNS)
         id = 1
         for question in self.questions:
-            writer.writerow([id, question.text, question.options])
+            options_column: str = ''
+            options = list(map(lambda x: str(x), question.options))
+            options_column = ', '.join(options)
+            writer.writerow([id, question.text, options_column])
             id += 1

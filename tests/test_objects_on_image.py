@@ -68,3 +68,15 @@ def test_when_can_not_find_pattern():
 
     expected = []
     assert got == expected
+
+
+def test_bug_from_4731():
+    image_path='./tests/fixtures/part_with_bug.png' 
+    pattern_path='./img/unchecked.png'
+    
+    got = ObjectsOnImage(
+        image_path=image_path, 
+        pattern_path=pattern_path
+    ).coordinates()
+    
+    assert len(got) == 1

@@ -1,5 +1,5 @@
 from app.area import Area
-from app.point import Point
+
 
 
 class Groups:
@@ -8,7 +8,9 @@ class Groups:
     
 
     def build(self) -> list:
-        """Group lines into groups and return it."""
+        """
+        Group lines into groups and return it.
+        """
         groups = []
         
         if not self.lines:
@@ -26,7 +28,5 @@ class Groups:
                 if i == len(self.lines) - 1:
                     groups.append(area)
 
-
-        
         return groups
 

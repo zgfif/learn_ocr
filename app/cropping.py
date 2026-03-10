@@ -9,7 +9,9 @@ class Cropping:
 
 
     def perform(self, pt1: Point, pt2: Point) -> ndarray | None:
-        """Crop image by two points and return cropped image. If no image return None."""
+        """
+        Crop image by two points and return cropped image as ndarrry object. If no image - return None.
+        """
         if self.image is None:
             return
         
