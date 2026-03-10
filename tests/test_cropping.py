@@ -1,12 +1,11 @@
 import cv2
 from app.cropping import Cropping
-from app.view_image import ViewImage
 from app.full_text_points import FULL_TEXT_POINTS
 
 
 
 def test_cropping():
-    image = cv2.imread(filename='./IMG_4732.png')
+    image = cv2.imread(filename='./tests/fixtures/IMG_4732.png')
     
     if image is None:
         return
@@ -15,10 +14,9 @@ def test_cropping():
         pt1=FULL_TEXT_POINTS.pt1, 
         pt2=FULL_TEXT_POINTS.pt2
     )
-    
-    if not cropped:
+
+    if cropped is None:
         return
-    ViewImage(image=cropped).perform()
 
-
-    
+    assert cropped.shape[0] == 2020
+    assert cropped.shape[1] == 1286

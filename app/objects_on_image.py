@@ -52,5 +52,7 @@ class ObjectsOnImage:
     
 
     def _image(self, path: str) -> ndarray | None:
-        """Return ndarray by image path."""
+        """
+        Return ndarray by image path if no image return None.
+        """
         return cv2.imread(filename=path, flags=0)

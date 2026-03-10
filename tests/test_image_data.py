@@ -1,11 +1,14 @@
 from app.image_data import ImageData
+import cv2
 
 
 
 def test_image_data():
-    data = ImageData(image_path='./IMG_4731.png').extract()
-    print(data)
-    print(len(data['level']), 'count of level list')
-    print(len(data['page_num']), 'page num')
-    print(len(data['block_num']), 'block num')
+    image = cv2.imread('./tests/fixtures/IMG_4731.png')
+
+    if image is None:
+        return
+
+    data = ImageData(image=image).extract()
+
     assert isinstance(data, dict)

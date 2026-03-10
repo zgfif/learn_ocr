@@ -1,7 +1,7 @@
 from app.result import Result
 import os
 from tests.fixtures.questions import question1, question2, question3
-import csv
+
 
 
 

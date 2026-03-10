@@ -3,7 +3,7 @@ from app.objects_on_image import ObjectsOnImage
 
 
 def test_one_object_on_image():
-    image_path = 'IMG_4731.png'
+    image_path = './tests/fixtures/IMG_4731.png'
     pattern_path = './img/checked.png'
 
     got = ObjectsOnImage(
@@ -17,7 +17,7 @@ def test_one_object_on_image():
 
 
 def test_two_objects_on_image():
-    image_path = 'IMG_4732.png'
+    image_path = './tests/fixtures/IMG_4732.png'
     pattern_path = './img/checked.png'
 
     got = ObjectsOnImage(
@@ -45,7 +45,7 @@ def test_when_invalid_path_to_image():
 
 
 def test_when_invalid_path_to_pattern():
-    image_path = 'IMG_4732.png'
+    image_path = './tests/fixtures/IMG_4732.png'
     pattern_path = ''
 
     got = ObjectsOnImage(
@@ -58,7 +58,7 @@ def test_when_invalid_path_to_pattern():
 
 
 def test_when_can_not_find_pattern():
-    image_path = './IMG_4732.png'
+    image_path = './tests/fixtures/IMG_4732.png'
     pattern_path = './img/youtube_logo.jpg'
 
     got = ObjectsOnImage(

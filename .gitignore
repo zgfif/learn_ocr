@@ -3,3 +3,4 @@ __pycache__
 *.csv
 cropped.png
 croped.png
+part_img_*.png
