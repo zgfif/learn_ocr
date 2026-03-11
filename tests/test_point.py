@@ -1,4 +1,6 @@
 from app.point import Point
+from pytest import raises
+
 
 
 def test_point1():
@@ -34,4 +36,25 @@ def test_point5():
 def test_point6():
     p1 = Point(0, 244)
     p2 = Point(1, 244)
+    assert (p1 == p2) is False
+
+
+def test_point7():
+    message: str = "Coordinates must be integers"
+    with raises(TypeError) as excinfo:
+        Point('2', 1) # type: ignore[arg-type]
+    assert message in str(excinfo.value)
+
+
+def test_point8():
+    message: str = "Coordinates must be integers"
+    with raises(TypeError) as excinfo:
+        Point(2, '1') # type: ignore[arg-type]
+    assert message in str(excinfo.value)
+
+
+
+def test_point9():
+    p1 = Point(0, 244)
+    p2 = 'abc'
     assert (p1 == p2) is False
