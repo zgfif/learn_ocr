@@ -7,26 +7,24 @@ class Groups:
         self.lines = lines
     
 
-    def build(self) -> list:
+    def build(self) -> list[Area]:
         """
-        Group lines into groups and return it.
-        """
-        groups = []
-        
+        Group consecutive lines that are close together and return the list of grouped Areas.
+        """        
         if not self.lines:
-            return groups
+            return []
+
+        groups: list[Area] = []
         
-        area = self.lines[0]
+        current_group = self.lines[0]
 
-        for i in range(len(self.lines)):
-            if self.lines[i].pt1.close_to(area.pt2):
-                area.pt2 = self.lines[i].pt2
+        for line in self.lines[1:]:
+            if line.pt1.close_to(current_group.pt2):
+                current_group.pt2 = line.pt2
             else:
-                groups.append(area)
-                area = self.lines[i]
+                groups.append(current_group)
+                current_group = line
 
-                if i == len(self.lines) - 1:
-                    groups.append(area)
+        groups.append(current_group)
 
         return groups
-
