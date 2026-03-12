@@ -1,14 +1,15 @@
 from numpy import ndarray
 from app.point import Point
+from cv2.typing import MatLike
 
 
 
 class Cropping:
-    def __init__(self, image: ndarray | None) -> None:
+    def __init__(self, image: MatLike | None) -> None:
         self.image = image
 
 
-    def perform(self, pt1: Point, pt2: Point) -> ndarray | None:
+    def perform(self, pt1: Point, pt2: Point) -> MatLike | None:
         """
         Crop image using two points. 
         Return cropped image or None if image is not set.
