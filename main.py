@@ -3,7 +3,7 @@ from app.full_text_points import FULL_TEXT_POINTS
 from app.cropping import Cropping
 from app.lines import Lines
 from app.image_data import ImageData
-from app.groups import Groups
+from app.build_groups import Groups
 from app.preparing_coordinates import PreparingCoordinates
 from numpy import ndarray
 from app.question_extracting import QuestionExtracting
@@ -13,8 +13,8 @@ from app.question import Question
 
 # list of images to extract questions.
 images: tuple = (
-    './IMG_4731.png', 
-    './IMG_4732.png',
+    './tests/fixtures/IMG_4731.png', 
+    './tests/fixtures/IMG_4732.png',
 )
 
 questions: list[Question] = []
@@ -46,7 +46,7 @@ for image in images:
     
 
     # return the list of grouped lines. each element has two coordinates pt1 and pt2.
-    grouped_lines = Groups(lines=lines_coordinates).build()
+    grouped_lines = Groups.build(lines=lines_coordinates)
 
     modified_groups = PreparingCoordinates(lines=grouped_lines).perform()
 
