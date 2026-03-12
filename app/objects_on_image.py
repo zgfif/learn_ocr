@@ -39,13 +39,11 @@ class ObjectsOnImage:
             rects.append([int(pt[0]), int(pt[1]), w, h])
             rects.append([int(pt[0]), int(pt[1]), w, h]) # Добавляем дважды (нужно для работы функции)
 
-
         # Группируем близкие прямоугольники
         # groupThreshold=1 (объединять, если наложились), eps=0.2 (насколько близко)
         grouped_rects, weights = cv2.groupRectangles(rects, groupThreshold=self.GROUP_THRESHOLD, eps=self.EPS)
 
         for (x, y, w, h) in grouped_rects:
-            # print(f"Реальный объект найден в: {x}, {y}")
             tpl = int(x), int(y)
             elements.append(tpl)
         return elements

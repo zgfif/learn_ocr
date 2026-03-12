@@ -7,7 +7,7 @@ def test_normalize_string():
 
     expected = 'Sie befinden sich in der Probezeit und sind bisher nicht auffällig geworden. Welche Folgen können eintreten, wenn Sie an dem Verkehrszeichen „Halt. Vorfahrt gewähren.“ nicht anhalten und dadurch andere Verkehrsteilnehmer gefährden?'
     
-    got = normalize_string(string=string)
+    got = normalize_string(text=string)
     
     assert expected == got
 
@@ -18,7 +18,7 @@ def test_normalize_string2():
 
     expected = 'Anordnung zum erneuten Ablegen einer theoretischen Fahrerlaubnisprüfung'
     
-    got = normalize_string(string=string)
+    got = normalize_string(text=string)
     
     assert expected == got
 

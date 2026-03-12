@@ -1,6 +1,5 @@
-def normalize_string(string: str) -> str:
+def normalize_string(text: str) -> str:
     """
-    Replace \\n with white space and remove heading and trailing white spaces.
+    Replace newline characters with spaces and strip leading/trailing whitespace.
     """
-    txt = string.replace('\n', ' ')
-    return txt.strip()
+    return text.replace('\n', ' ').strip()
