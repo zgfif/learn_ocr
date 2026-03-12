@@ -67,4 +67,3 @@ def test_point11():
     p1 = Point(0, 0)
     p2 = Point(0, Point.CLOSENESS_THRESHOLD + 1)
     assert not p1.close_to(p2)
-
