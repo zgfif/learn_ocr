@@ -1,7 +1,7 @@
 import cv2
 from app.full_text_points import FULL_TEXT_POINTS
 from app.cropping import Cropping
-from app.lines import Lines
+from app.fetch_lines import Lines
 from app.fetch_image_data import ImageData
 from app.build_groups import Groups
 from app.preparing_coordinates import PreparingCoordinates

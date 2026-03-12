@@ -1,8 +1,9 @@
 from tests.fixtures.img_4731_image_dict import image_data
-from app.lines import Lines
+from app.fetch_lines import fetch_lines
 
 
 
-def test_lines():
-    line_blocks = Lines(data=image_data).coordinates()
-    assert len(line_blocks) == 14
+def test_fetch_lines():
+    lines = fetch_lines(data=image_data)
+    assert isinstance(lines, list)
+    assert len(lines) == 14
