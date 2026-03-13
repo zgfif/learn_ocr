@@ -1,6 +1,6 @@
 from numpy import ndarray
 from app.option import Option
-from app.objects_on_image import ObjectsOnImage
+from app.fetch_object_coordinates import ObjectsOnImage
 from pytesseract import image_to_string
 from app.cropping import Cropping
 import cv2
