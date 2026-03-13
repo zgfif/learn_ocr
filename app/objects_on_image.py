@@ -7,7 +7,7 @@ from app.types import Coordinates
 
 class ObjectsOnImage:
     THRESHOLD: float = 0.99
-    PATTERN_SIZE: tuple = (120, 120)
+    PATTERN_SIZE: tuple[int, int] = (120, 120)
     GROUP_THRESHOLD: int = 1
     EPS: float = 0.2
 
