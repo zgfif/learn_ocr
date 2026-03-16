@@ -12,8 +12,10 @@ def test_fetch_match_map():
     assert template is not None
     got = fetch_match_map(image=image, template=template)
     assert isinstance(got, ndarray)
-    for line in got:
-        print(line)
+    assert len(got) == image.shape[0] - template.shape[0] + 1
+    assert len(got[0]) == image.shape[1] - template.shape[1] + 1
+    assert len(got[-1]) == image.shape[1] - template.shape[1] + 1
+
     assert got.ndim == 2
 
 

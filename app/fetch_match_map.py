@@ -40,6 +40,6 @@ def fetch_match_map(
                          f'image size ({h_img}, {w_img}).')
     return cv2.matchTemplate(
         image=image, 
-        templ=template, 
+        templ=template,
         method=method
     )

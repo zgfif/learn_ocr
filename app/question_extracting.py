@@ -1,6 +1,6 @@
 from numpy import ndarray
 from app.option import Option
-from app.fetch_object_coordinates import ObjectsOnImage
+from app.fetch_object_coordinates import fetch_object_coordinates
 from pytesseract import image_to_string
 from app.cropping import Cropping
 import cv2
@@ -8,7 +8,7 @@ from app.point import Point
 from app.view_image import ViewImage
 from app.question import Question
 from app.normalize_string import normalize_string
-
+from app.load_image import load_image
 
 
 class QuestionExtracting:
@@ -24,17 +24,14 @@ class QuestionExtracting:
         options: list[Option] = []
 
         for image in self.images:
-            ticked_coordinates = ObjectsOnImage(
-                image_path=image, 
-                pattern_path='./img/checked.png').coordinates()
-
-            unticked_coordinates = ObjectsOnImage(
-                image_path=image, 
-                pattern_path='./img/unchecked.png').coordinates()
-            # print(image, 'image')
-            # print('ticked_coordinates', ticked_coordinates)
-            # print('unticked_coordinates', unticked_coordinates)
-            # print('***' * 5)
+            ticked_coordinates = fetch_object_coordinates(
+                image=load_image(image), 
+                pattern=load_image('./img/checked.png')
+            )
+            unticked_coordinates = fetch_object_coordinates(
+                image=load_image(image), 
+                pattern=load_image('./img/unchecked.png')
+            )
             if not ticked_coordinates and not unticked_coordinates:
                 question = image_to_string(image=image, lang='deu')
                 question = normalize_string(question)
