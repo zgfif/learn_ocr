@@ -18,5 +18,4 @@ def is_windy_day() -> bool:
     # response.raise_for_status
     data = response.json()
     wind_speed = data['current_weather']['windspeed']
-    print(wind_speed)
     return float(wind_speed) > 10.0

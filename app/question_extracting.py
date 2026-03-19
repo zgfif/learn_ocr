@@ -36,7 +36,6 @@ class QuestionExtracting:
             if not ticked_coordinates and not unticked_coordinates:
                 question = image_to_string(image=image, lang='deu')
                 question = normalize_string(question)
-                # print('~~~~', question, '****')
                 continue
             if ticked_coordinates:
                 correctness = True
