@@ -5,6 +5,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 
+
 def group_rectangles(
         rectangles: list[tuple[int, int, int, int]], 
         grouping_threshold: int = 1, 
