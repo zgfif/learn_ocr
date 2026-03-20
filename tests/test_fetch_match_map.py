@@ -7,7 +7,7 @@ from pytest import raises
 
 def test_fetch_match_map():
     image = load_image('./tests/fixtures/IMG_4731.png')
-    template = load_image('./img/checked.png')
+    template = load_image('./img/ticked.png')
     assert image is not None
     assert template is not None
     got = fetch_match_map(image=image, template=template)
@@ -22,7 +22,7 @@ def test_fetch_match_map():
 
 def test_fetch_match_map_with_raising():
     template = load_image('./tests/fixtures/IMG_4731.png')
-    image = load_image('./img/checked.png')
+    image = load_image('./img/ticked.png')
     assert image is not None
     assert template is not None
 

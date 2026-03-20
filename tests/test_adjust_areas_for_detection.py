@@ -1,10 +1,10 @@
-from app.increase_areas import increase_areas
+from app.adjust_areas_for_detection import adjust_areas_for_detection
 from app.area import Area
 from app.point import Point
 
 
 
-def test_increase_areas():
+def test_adjast_areas_for_detection_when_three_areas():
     areas: list[Area] = [
         Area(
             Point(20, 20),
@@ -22,8 +22,8 @@ def test_increase_areas():
 
     expected: list[Area] = [
         Area(
-            Point(0, -5),
-            Point(1250, 182)
+            Point(0, 0),
+            Point(1250, 187)
         ),
         Area(
             Point(0, 115),
@@ -34,8 +34,10 @@ def test_increase_areas():
             Point(1250, 412)
         ),
     ]
-
-    got = increase_areas(areas=areas)
-    print(got)
+    got = adjust_areas_for_detection(areas=areas)
     assert expected == got
 
+
+
+def test_adjanst_areas_for_detection_when_no_areas():
+    assert adjust_areas_for_detection([]) == []

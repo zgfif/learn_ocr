@@ -34,7 +34,7 @@ def image_4731():
     """
     Return IMG_4731.png as NDArray
     """
-    image = load_image(path='./tests/pytest.fixtures/IMG_4731.png')
+    image = load_image(path='./tests/fixtures/IMG_4731.png')
     if image is None:
         pytest.skip('Test image not found.')
     return image
@@ -46,7 +46,7 @@ def image_4732():
     """
     Return IMG_4732.png as NDArray
     """
-    image = load_image(path='./tests/pytest.fixtures/IMG_4732.png')
+    image = load_image(path='./tests/fixtures/IMG_4732.png')
     if image is None:
         pytest.skip('Test image not found.')
     return image
@@ -54,26 +54,26 @@ def image_4732():
 
 
 @pytest.fixture
-def checked():
+def ticked():
     """
-    Return checked.png as NDArray
+    Return ticked.png as NDArray
     """
-    checked_image = load_image(path='./img/checked.png')
-    if checked_image is None:
+    ticked_image = load_image(path='./img/ticked.png')
+    if ticked_image is None:
         pytest.skip('Test image not found.')
-    return checked_image
+    return ticked_image
 
 
 
 @pytest.fixture
-def unchecked():
+def unticked():
     """
-    Return unchecked.png as NDArray
+    Return unticked.png as NDArray
     """
-    unchecked_image = load_image(path='./img/unchecked.png')
-    if unchecked_image is None:
+    unticked_image = load_image(path='./img/unticked.png')
+    if unticked_image is None:
         pytest.skip('Test image not found.')
-    return unchecked_image
+    return unticked_image
 
 
 @pytest.fixture
@@ -88,20 +88,20 @@ def logo():
 
 
 
-def test_one_object_on_image(image_4731, checked):
+def test_one_object_on_image(image_4731, ticked):
     got = find_template_coordinates(
         image=image_4731, 
-        template=checked,
+        template=ticked,
     )
     expected = [(37, 404),]
     assert_points_are_close(got, expected)
 
 
 
-def test_two_objects_on_image(image_4732, checked):
+def test_two_objects_on_image(image_4732, ticked):
     got = find_template_coordinates(
         image=image_4732, 
-        template=checked,
+        template=ticked,
     )
     expected = [(37, 894), (37, 1136),]
     assert_points_are_close(got, expected)
@@ -135,10 +135,10 @@ def test_when_can_not_find_template(image_4732, logo):
 
 
 
-def test_bug_from_4731(unchecked):
+def test_bug_from_4731(unticked):
     got = find_template_coordinates(
         image=load_image('./tests/fixtures/part_with_bug.png'), 
-        template=unchecked,
+        template=unticked,
     )
     assert len(got) == 1
     x, y = got[0]
@@ -146,7 +146,7 @@ def test_bug_from_4731(unchecked):
     assert y > 0
 
 
-def test_mocking_fetch_locations(mocker, image_4731, unchecked):
+def test_mocking_fetch_locations(mocker, image_4731, unticked):
     return_value = (
         np.array([403, 404, 405]), 
         np.array([37, 37, 37])
@@ -154,7 +154,7 @@ def test_mocking_fetch_locations(mocker, image_4731, unchecked):
     mocker.patch('app.find_template_coordinates.fetch_locations', return_value=return_value)
     got = find_template_coordinates(
         image=image_4731,
-        template=unchecked
+        template=unticked
     )
     assert_points_are_close(got, expected=[(37, 404)])
 

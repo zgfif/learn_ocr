@@ -1,10 +1,10 @@
 import cv2
 from app.full_text_points import FULL_TEXT_POINTS
-from app.cropping import Cropping
+from app.crop_image import Cropping
 from app.fetch_lines import fetch_lines
 from app.fetch_image_data import fetch_image_data
 from app.build_groups import build_groups
-from app.increase_areas import increase_areas
+from app.adjust_areas_for_detection import adjust_areas_for_detection
 from numpy import ndarray
 from app.question_extracting import QuestionExtracting
 from app.result import Result
@@ -48,12 +48,12 @@ for image in images:
     # return the list of grouped lines. each element has two coordinates pt1 and pt2.
     grouped_lines = build_groups(lines=lines_coordinates)
 
-    modified_groups = increase_areas(areas=grouped_lines)
+    areas = adjust_areas_for_detection(areas=grouped_lines)
 
     elements_images: list[ndarray] = []
 
-    for group in modified_groups:
-        element_image = Cropping(image=cropped_image).perform(group.pt1, group.pt2)
+    for area in areas:
+        element_image = Cropping(image=cropped_image).perform(area.pt1, area.pt2)
         if element_image is None:
             continue
         elements_images.append(element_image)

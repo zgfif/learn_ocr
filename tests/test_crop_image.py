@@ -1,5 +1,5 @@
 import cv2
-from app.cropping import Cropping
+from app.crop_image import crop_image
 from app.full_text_points import FULL_TEXT_POINTS
 
 
@@ -10,7 +10,8 @@ def test_cropping():
     if image is None:
         return
 
-    cropped = Cropping(image=image).perform(
+    cropped = crop_image(
+        image=image,
         pt1=FULL_TEXT_POINTS.pt1, 
         pt2=FULL_TEXT_POINTS.pt2
     )

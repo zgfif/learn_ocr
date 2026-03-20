@@ -9,4 +9,3 @@ class Option:
 
     def __repr__(self) -> str:
         return f'{self.text} - {self.correctness}'
-
