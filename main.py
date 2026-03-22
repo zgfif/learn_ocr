@@ -6,7 +6,7 @@ from app.fetch_image_data import fetch_image_data
 from app.build_groups import build_groups
 from app.adjust_areas_for_detection import adjust_areas_for_detection
 from numpy import ndarray
-from app.question_extracting import QuestionExtracting
+from app.extract_question import QuestionExtracting
 from app.result import Result
 from app.question import Question
 
