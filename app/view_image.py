@@ -1,10 +1,10 @@
 import cv2
-import numpy
+import numpy as np
 
 
 
 class ViewImage:
-    def __init__(self, image: numpy.ndarray) -> None:
+    def __init__(self, image: np.ndarray) -> None:
         self.image = image
 
 
