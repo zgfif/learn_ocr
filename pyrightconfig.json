@@ -1,0 +1,9 @@
+{
+  "typeCheckingMode": "standard",
+  "include": ["."],
+  "exclude": ["venv", "build", "dist"],
+  "reportUnusedFunction": true,
+  "reportUnusedVariable": true,
+  "reportOptionalSubscript": true,
+  "reportOptionalMemberAccess": true
+}

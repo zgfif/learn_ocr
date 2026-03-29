@@ -1,0 +1,1 @@
+from app.has_template import has_template

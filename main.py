@@ -1,16 +1,16 @@
-import cv2
-
-from app.full_text_points import FULL_TEXT_POINTS
-from app.crop_image import crop_image
-from app.fetch_lines import fetch_lines
-from app.fetch_image_data import fetch_image_data
-from app.build_groups import build_groups
-from app.adjust_areas_for_detection import adjust_areas_for_detection
 from numpy import ndarray
-from app.extract_question import extract_question
+
+from app.adjust_areas_for_detection import adjust_areas_for_detection
+from app.build_groups import build_groups
+from app.build_question import build_question
+from app.crop_image import crop_image
+from app.fetch_image_data import fetch_image_data
+from app.fetch_lines import fetch_lines
+from app.full_text_points import FULL_TEXT_POINTS
+from app.load_image import load_image
 from app.result import Result
 from app.question import Question
-from app.load_image import load_image
+
 
 
 # list of images to extract questions.
@@ -22,6 +22,8 @@ screenshots: tuple = (
 ticked_template = load_image('./img/ticked.png')
 unticked_template = load_image('./img/unticked.png')
 
+if ticked_template is None or unticked_template is None:
+    raise RuntimeError('can not load templates.')
 
 questions: list[Question] = []
 
@@ -55,36 +57,24 @@ for screenshot in screenshots:
 
     areas = adjust_areas_for_detection(areas=grouped_lines)
 
-    elements_images: list[ndarray] = []
+    image_parts: list[ndarray] = []
 
     for area in areas:
-        element_image = crop_image(
+        image_part = crop_image(
             image=cropped_image, 
             pt1=area.pt1, 
             pt2=area.pt2
         )
-        if element_image is None:
+        if image_part is None:
             continue
-        elements_images.append(element_image)
-    
-    # i: int = 0
+        image_parts.append(image_part)
 
-    # for image in elements_images:
-    #     cv2.imwrite(filename=f'part_img_{i}.png', img=image)
-    #     i+=1
-
-    # parts_list = []
-
-    # for i in range(len(elements_images)):
-    #     parts_list.append(f'part_img_{i}.png')
-    
-
-    question = extract_question(
-        images=elements_images, 
+    question = build_question(
+        image_parts=image_parts, 
         ticked_template=ticked_template, 
-        unticked_template=unticked_template,
+        unticked_template=unticked_template
     )
-    if question:
-        questions.append(question)
+    
+    questions.append(question)
 
     Result(questions=questions).save('result.csv')

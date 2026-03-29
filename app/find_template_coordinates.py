@@ -32,7 +32,6 @@ def find_template_coordinates(
 
     match_map = fetch_match_map(image=image, template=template)
     locations = fetch_locations(match_map)
-    print(locations)
     
     h, w = template.shape[:2]  # type: ignore[attr-defined]
     

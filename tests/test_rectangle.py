@@ -1,8 +1,8 @@
 import cv2
-from app.rectangle import Rectangle
-from app.view_image import ViewImage
+
 from app.area import Area
 from app.point import Point
+from app.rectangle import Rectangle
 
 
 
@@ -21,8 +21,6 @@ def test_rectangle():
 
     for unit in units:
         Rectangle(image=image).draw(
-            pt1=unit.pt1, pt2=unit.pt2
+            pt1=unit.pt1, 
+            pt2=unit.pt2
         )
-
-    # ViewImage(image=image).perform()
-
