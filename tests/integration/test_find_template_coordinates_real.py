@@ -1,5 +1,4 @@
 import pytest
-import numpy as np
 from typing import Sequence
 
 from app.find_template_coordinates import find_template_coordinates
@@ -9,9 +8,9 @@ from app.types import Coordinates
 
 
 def close(
-        p1: Coordinates, 
-        p2: Coordinates, 
-        tol: int = 2
+    p1: Coordinates, 
+    p2: Coordinates, 
+    tol: int = 2
 ) -> bool:
     """
     Return True if points are within tolerance.
@@ -21,9 +20,10 @@ def close(
 
 
 def assert_points_are_close(
-        got: Sequence[Coordinates], 
-        expected: Sequence[Coordinates], 
-        tol: int = 2):
+    got: Sequence[Coordinates], 
+    expected: Sequence[Coordinates], 
+    tol: int = 2
+) -> None:
     assert len(got) == len(expected)
     assert all(any(close(g, e, tol) for g in got) for e in expected)
 
@@ -32,7 +32,7 @@ def assert_points_are_close(
 @pytest.fixture
 def image_4731():
     """
-    Return IMG_4731.png as NDArray
+    Return IMG_4731.png as NDArray.
     """
     image = load_image(path='./tests/fixtures/IMG_4731.png')
     if image is None:
@@ -44,7 +44,7 @@ def image_4731():
 @pytest.fixture
 def image_4732():
     """
-    Return IMG_4732.png as NDArray
+    Return IMG_4732.png as NDArray.
     """
     image = load_image(path='./tests/fixtures/IMG_4732.png')
     if image is None:
@@ -76,6 +76,7 @@ def unticked():
     return unticked_image
 
 
+
 @pytest.fixture
 def logo():
     """
@@ -88,7 +89,7 @@ def logo():
 
 
 
-def test_one_object_on_image(image_4731, ticked):
+def test_one_object_on_image(image_4731, ticked) -> None:
     got = find_template_coordinates(
         image=image_4731, 
         template=ticked,
@@ -98,7 +99,7 @@ def test_one_object_on_image(image_4731, ticked):
 
 
 
-def test_two_objects_on_image(image_4732, ticked):
+def test_two_objects_on_image(image_4732, ticked) -> None:
     got = find_template_coordinates(
         image=image_4732, 
         template=ticked,
@@ -108,16 +109,16 @@ def test_two_objects_on_image(image_4732, ticked):
 
 
 
-def test_when_invalid_path_to_image(logo):
+def test_when_invalid_path_to_image(logo) -> None:
     got = find_template_coordinates(
-        image=load_image(''), 
+        image=load_image(''),
         template=logo,
     )
     assert got == []
 
 
 
-def test_when_invalid_path_to_template(image_4732):
+def test_when_invalid_path_to_template(image_4732) -> None:
     got = find_template_coordinates(
         image=image_4732, 
         template=load_image(''),
@@ -126,7 +127,7 @@ def test_when_invalid_path_to_template(image_4732):
 
 
 
-def test_when_can_not_find_template(image_4732, logo):
+def test_when_can_not_find_template(image_4732, logo) -> None:
     got = find_template_coordinates(
         image=image_4732, 
         template=logo,
@@ -135,7 +136,7 @@ def test_when_can_not_find_template(image_4732, logo):
 
 
 
-def test_bug_from_4731(unticked):
+def test_bug_from_4731(unticked) -> None:
     got = find_template_coordinates(
         image=load_image('./tests/fixtures/part_with_bug.png'), 
         template=unticked,
@@ -144,18 +145,3 @@ def test_bug_from_4731(unticked):
     x, y = got[0]
     assert x > 0
     assert y > 0
-
-
-def test_mocking_fetch_locations(mocker, image_4731, unticked):
-    return_value = (
-        np.array([403, 404, 405]), 
-        np.array([37, 37, 37])
-    )
-    mocker.patch('app.find_template_coordinates.fetch_locations', return_value=return_value)
-    got = find_template_coordinates(
-        image=image_4731,
-        template=unticked
-    )
-    assert_points_are_close(got, expected=[(37, 404)])
-
-

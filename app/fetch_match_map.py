@@ -36,8 +36,10 @@ def fetch_match_map(
     h_templ, w_templ = template.shape[:2]
 
     if h_templ > h_img or w_templ > w_img:
-        raise ValueError(f'Template size ({h_templ}, {w_templ}) must not exceed '
-                         f'image size ({h_img}, {w_img}).')
+        raise ValueError(
+            f'Template size ({h_templ}, {w_templ}) must not exceed '
+            f'image size ({h_img}, {w_img}).'
+        )
     return cv2.matchTemplate(
         image=image, 
         templ=template,

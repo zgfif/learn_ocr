@@ -1,13 +1,13 @@
 from cv2.typing import MatLike
 
-from app import find_template_coordinates
 from app.find_template_coordinates import find_template_coordinates
+from app.types import Coordinates
 
 
 
 def has_template(image: MatLike, template: MatLike) -> bool:
     """
-    Does the image has template.
+    Check if the image contain the template.
     
     Parameters
     ----------
@@ -19,10 +19,10 @@ def has_template(image: MatLike, template: MatLike) -> bool:
     Returns
     -------
     bool
+        True if the template was found, False -otherwise.
     """
-    return bool(
-        find_template_coordinates(
-            image=image, 
-            template=template
-        )
+    coords: list[Coordinates] = find_template_coordinates(
+        image=image, 
+        template=template
     )
+    return bool(coords)
