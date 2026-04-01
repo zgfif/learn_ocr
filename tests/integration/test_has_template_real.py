@@ -1,80 +1,63 @@
-import pytest
-
+from dataclasses import dataclass
 from pathlib import Path
+
 from cv2.typing import MatLike
+import pytest
 
 from app.has_template import has_template
 from app.load_image import load_image
 
 
-BASE_PATH: Path = Path(__file__).resolve().parent.parent
+BASE_PATH: Path = Path(__file__).resolve().parents[1]
 FIXTURES_PATH: Path = BASE_PATH / "fixtures" / "parts"
 TEMPLATES_PATH: Path = BASE_PATH.parent / "img"
 
 
 
-def func():
-    return 'aaa'
+@dataclass
+class Case:
+    image: str
+    template: str
+    expected: bool
 
 
-def load_img(
-    base_path: Path, 
-    filename: str
-) -> MatLike:
-    full_path = base_path / filename
-    image = load_image(str(full_path))
-    if image is None:
-        raise FileNotFoundError(f"Cannot load image: {full_path}")
-    return image
-
-
-
-def _load_from(base_path: Path, request: pytest.FixtureRequest) -> MatLike:
-    try:
-        return load_img(base_path=base_path, filename=request.param)
-    except FileNotFoundError as e:
-        pytest.skip(str(e))
-
-
-@pytest.fixture
-def image(request: pytest.FixtureRequest) -> MatLike:
-    return _load_from(base_path=FIXTURES_PATH, request=request)
+    def id(self) -> str:
+        return f"{self.image[-6:]} | {self.template[-6:]} -> {self.expected}"
 
 
 
 @pytest.fixture
-def template(request: pytest.FixtureRequest) -> MatLike:
-    return _load_from(base_path=TEMPLATES_PATH, request=request)
+def load():
+    def _load_img(base_path: Path, filename: str) -> MatLike:
+        full_path = base_path / filename
+        image = load_image(str(full_path))
+        if image is None:
+            raise FileNotFoundError(f"Cannot load image: {full_path}")
+        return image
+    return _load_img
 
 
+
+cases: list[Case] = [
+    Case("part_img_0.png", "ticked.png", False),
+    Case("part_img_0.png", "unticked.png", False),
+    Case("part_img_1.png", "ticked.png", False),
+    Case("part_img_1.png", "unticked.png", True),
+    Case("part_img_2.png", "ticked.png", True),
+    Case("part_img_2.png", "unticked.png", False),
+    Case("part_img_3.png", "ticked.png", True),
+    Case("part_img_3.png", "unticked.png", False),
+]
 
 @pytest.mark.parametrize(
-    "image, template, expected", 
-    [
-        ("part_img_0.png", "ticked.png", False),
-        ("part_img_0.png", "unticked.png", False),
-        ("part_img_1.png", "ticked.png", False),
-        ("part_img_1.png", "unticked.png", True),
-        ("part_img_2.png", "ticked.png", True),
-        ("part_img_2.png", "unticked.png", False),
-        ("part_img_3.png", "ticked.png", True),
-        ("part_img_3.png", "unticked.png", False),
-    ],
-    ids=[
-        "img_0 ticked -> False",
-        "img_0 unticked -> False",
-        "img_1 ticked -> False",
-        "img_1 unticked -> True",
-        "img_2 ticked -> True",
-        "img_2 unticked -> False",
-        "img_3 ticked -> True",
-        "img_3 unticked -> False",
-    ],
-    indirect=["image", "template"],
+    "case", 
+    cases,
+    ids=[c.id() for c in cases]
 )
-def test_has_template(
-    image: MatLike, 
-    template: MatLike, 
-    expected: bool
-) -> None:
-    assert has_template(image, template) is expected, "Unexpected result for template match."
+def test_has_template(case: Case, load) -> None:
+    image = load(FIXTURES_PATH, case.image)
+    template = load(TEMPLATES_PATH, case.template)
+    got = has_template(image, template)
+    assert got == case.expected, (
+        f"{case.image=}:{case.template=} expected {case.expected} got {got}"
+    )
